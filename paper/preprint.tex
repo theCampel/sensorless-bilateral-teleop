@@ -22,19 +22,34 @@
 \title{Sensorless Bilateral Force Feedback for\\Low-Cost Scaled Teleoperation}
 
 \author{\IEEEauthorblockN{Leonardo Camacho Pel\'{a}ez}
-\IEEEauthorblockA{School of Informatics\\University of Edinburgh\\Edinburgh, United Kingdom\\
+\IEEEauthorblockA{University of Edinburgh\\
 \texttt{leocamacho707@gmail.com}}}
+
+\makeatletter
+\ifCLASSOPTIONconference
+\def\@maketitle{\newpage
+\bgroup\par\vskip\IEEEtitletopspace\vskip\IEEEtitletopspaceextra\centering%
+   \vskip0.2em{\Huge\ifCLASSOPTIONtransmag\bfseries\LARGE\fi\@IEEEcompsoconly{\sffamily}\@IEEEcompsocconfonly{\normalfont\normalsize\vskip 2\@IEEEnormalsizeunitybaselineskip
+   \bfseries\Large}\@IEEEcompsocnotconfonly{\vskip 0.75\@IEEEnormalsizeunitybaselineskip}\@title\par}\relax
+   \@IEEEcompsocnotconfonly{\vskip 0.5\@IEEEnormalsizeunitybaselineskip}\vskip1.0em\par%
+   {\@IEEEspecialpapernotice\mbox{}\vskip\@IEEEauthorblockconfadjspace%
+    \mbox{}\hfill\begin{@IEEEauthorhalign}\@author\end{@IEEEauthorhalign}\hfill\mbox{}\par}\relax
+   \vskip 1.2em
+   \begin{minipage}{\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{figures/hero.png}
+      \par\vspace{0.35em}
+      {\footnotesize Fig.~1: \textbf{System overview.} (A)~The operator controls a PincherX-100 leader arm while the 2$\times$-scaled follower contacts an obstacle. (B)~Motor effort readings from the follower arm during obstacle contact: shoulder effort (dark) exceeds the 300\,mA feedback threshold (dashed), triggering proportional resistance at the leader. (C)~RViz visualisation showing leader and follower arm states in real time.\par}
+   \end{minipage}\par
+\par\addvspace{0.5\baselineskip}\egroup}
+\fi
+\makeatother
 
 \begin{document}
 
-\begin{figure*}[!t]
-    \centering
-    \includegraphics[width=\textwidth]{figures/hero.png}
-    \caption{\textbf{System overview.} (A)~The operator controls a PincherX-100 leader arm while the 2$\times$-scaled follower contacts an obstacle. (B)~Motor effort readings from the follower arm during obstacle contact: shoulder effort (dark) exceeds the 300\,mA feedback threshold (dashed), triggering proportional resistance at the leader. (C)~RViz visualisation showing leader and follower arm states in real time.}
-    \label{fig:hero}
-\end{figure*}
-
 \maketitle
+\setcounter{figure}{0}
+\refstepcounter{figure}\label{fig:hero}
 
 % ===== ABSTRACT =====
 \begin{abstract}
@@ -53,7 +68,7 @@ All hardware designs, software, and CAD files are open-source.
 
 In 1949, Raymond Goertz built the first mechanical bilateral manipulator at Argonne National Laboratory, allowing a human operator to handle radioactive materials while feeling the forces encountered by the remote arm~\cite{goertz1949}. Five years later, Goertz replaced the mechanical linkage with electrical servo coupling~\cite{goertz1954}, establishing the fundamental architecture that bilateral teleoperators still follow today: a leader arm that the operator moves, a follower arm that tracks it, and a feedback channel that communicates environment forces back to the operator's hand.
 
-For decades, this architecture required industrial-grade hardware. Surgical robots like the da Vinci system cost upwards of \$2 million; even research platforms like the Franka Emika Panda (\$30,000+) are prohibitively expensive for many labs. A recent wave of low-cost systems has begun to change this. ALOHA~\cite{zhao2023aloha} demonstrated fine bimanual manipulation for \$\sim$20,000 using commodity arms. GELLO~\cite{wu_2024_gello} built kinematically-matched leaders for under \$300. The Koch arm~\cite{koch2024} pushed the cost of a single leader-follower pair below \$250. These systems have enabled imitation learning at previously impossible scale.
+For decades, this architecture required industrial-grade hardware. Surgical robots like the da Vinci system cost upwards of \$2 million; even research platforms like the Franka Emika Panda (\$30,000+) are prohibitively expensive for many labs. A recent wave of low-cost systems has begun to change this. ALOHA~\cite{zhao2023aloha} demonstrated fine bimanual manipulation for approximately \$20,000 using commodity arms. GELLO~\cite{wu_2024_gello} built kinematically-matched leaders for under \$300. The Koch arm~\cite{koch2024} pushed the cost of a single leader-follower pair below \$250. These systems have enabled imitation learning at previously impossible scale.
 
 However, all of these systems are \emph{unilateral}: the operator moves the leader, the follower tracks, and that is all. There is no force feedback channel. The operator cannot feel when the follower contacts an obstacle, grasps an object, or is overloaded. This is not merely an ergonomic gap---bilateral feedback is what made Goertz's original system safe enough for handling radioactive material, and what makes surgical telemanipulation precise enough for millimetre-scale suturing~\cite{enayati_2016_haptics, vandermeijden2009}.
 
