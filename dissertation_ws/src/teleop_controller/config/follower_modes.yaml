@@ -1,0 +1,22 @@
+# This file is for the FOLLOWER arm.
+# It keeps the arm AND GRIPPER in 'position' mode, but makes them move very fast.
+groups:
+  arm:
+    operating_mode: 'position'
+    profile_type: 'time'
+    profile_velocity: 50       # Total move time: 50ms (fast)
+    profile_acceleration: 10   # Accel time: 10ms (safe, non-zero)
+  gripper:
+    # --- THIS IS THE FIX ---
+    operating_mode: 'position'
+    profile_type: 'time'
+    profile_velocity: 50
+    profile_acceleration: 10
+
+singles:
+  gripper:
+    # --- THIS IS THE FIX (for consistency) ---
+    operating_mode: 'position'
+    profile_type: 'time'
+    profile_velocity: 50
+    profile_acceleration: 10

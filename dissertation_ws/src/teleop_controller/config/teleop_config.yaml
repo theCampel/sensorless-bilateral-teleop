@@ -1,0 +1,82 @@
+# =============================================================
+# TELEOPERATION SYSTEM CONFIGURATION - DUAL PAIR
+# Two leader-follower pairs with shared invisible wall
+# =============================================================
+
+# --- LEFT PAIR (follower on +Y side) ---
+
+teleop_node_left:
+  ros__parameters:
+    leader_name: 'leader_left'
+    follower_name: 'follower_left'
+
+    # Invisible Wall (wall_y_position is in follower's base_link frame)
+    # Left follower base is at world Y=+0.375, center wall at world Y=0
+    # So wall in local frame = 0 - 0.375 = -0.375
+    wall_enabled: true
+    wall_y_position: -0.375
+    wall_direction: -1          # freeze when Y < wall (crossing toward right)
+    debug_wall: false
+
+    # Graceful Shutdown
+    sleep_position: [-0.1, -1.75, 1.7, 0.8, 0.0]
+    shutdown_move_time: 1500
+    shutdown_timeout: 3.0
+
+force_feedback_node_left:
+  ros__parameters:
+    leader_name: 'leader_left'
+    follower_name: 'follower_left'
+
+    enabled: true
+    effort_threshold: 300.0
+    max_pwm: 350.0
+    pwm_scale: 0.5
+    smoothing_factor: 0.15
+    pwm_deadband: 20
+    update_rate: 30.0
+
+motion_node_left:
+  ros__parameters:
+    leader_name: 'leader_left'
+    follower_name: 'follower_left'
+    marker_y: 0.375
+
+# --- RIGHT PAIR (follower on -Y side) ---
+
+teleop_node_right:
+  ros__parameters:
+    leader_name: 'leader_right'
+    follower_name: 'follower_right'
+
+    # Invisible Wall (wall_y_position is in follower's base_link frame)
+    # Right follower base is at world Y=-0.375, center wall at world Y=0
+    # So wall in local frame = 0 - (-0.375) = +0.375
+    wall_enabled: true
+    wall_y_position: 0.375
+    wall_direction: 1           # freeze when Y > wall (crossing toward left)
+    debug_wall: false
+
+    # Graceful Shutdown
+    sleep_position: [-0.1, -1.75, 1.7, 0.8, 0.0]
+    shutdown_move_time: 1500
+    shutdown_timeout: 3.0
+
+force_feedback_node_right:
+  ros__parameters:
+    leader_name: 'leader_right'
+    follower_name: 'follower_right'
+
+    enabled: true
+    effort_threshold: 300.0
+    max_pwm: 350.0
+    pwm_scale: 0.5
+    smoothing_factor: 0.15
+    pwm_deadband: 20
+    update_rate: 30.0
+
+motion_node_right:
+  ros__parameters:
+    leader_name: 'leader_right'
+    follower_name: 'follower_right'
+    marker_y: -0.375

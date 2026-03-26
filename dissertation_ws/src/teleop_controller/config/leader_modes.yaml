@@ -1,0 +1,11 @@
+groups:
+  arm:
+    operating_mode: 'pwm'
+    profile_type: 'velocity'
+    torque_enable: false  # Start easy to move, force_feedback_node controls this
+
+singles:
+  gripper:
+    operating_mode: 'pwm'
+    profile_type: 'velocity'
+    torque_enable: false  # ALWAYS easy to move - never changes
