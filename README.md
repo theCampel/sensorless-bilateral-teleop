@@ -2,7 +2,7 @@
 
 A dual-pair bimanual teleoperation system that achieves bilateral force feedback using only motor current readings from commodity $27.50 Dynamixel servos, with custom 2x-scaled 3D-printed follower arms.
 
-**[Paper](paper/preprint.pdf)** | **[Video](https://youtu.be/PqzKTUld3uw)** | **[Project Page](https://leocamacho.co/stories/dissertation)**
+**[Paper](paper/preprint.pdf)** | **[Video](https://youtu.be/PqzKTUld3uw)** | **[Project Page](https://leocamacho.co/teleop)**
 
 ![System in use](paper/figures/wideshot-usage.png)
 
