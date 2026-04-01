@@ -30,3 +30,5 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+*.fdb_latexmk
+*.fls
